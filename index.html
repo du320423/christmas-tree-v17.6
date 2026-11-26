@@ -4047,4 +4047,27 @@ three/build/three.module.js:
    *)
 */
 
-</script></body></html>
+</script>
+<style id="minimal-style">
+body.minimal #left-sidebar, body.minimal .bottom-left-panel, body.minimal #webcam-wrapper,
+body.minimal #top-right-controls, body.minimal .hide-me { display: none !important; }
+#minimal-toggle{ position:fixed; right:12px; top:12px; z-index:90; width:36px; height:36px; border-radius:50%;
+  border:1px solid rgba(212,175,55,.45); background:rgba(0,0,0,.45); color:#d4af37; font-size:15px;
+  display:flex; align-items:center; justify-content:center; cursor:pointer; opacity:.28;
+  transition:opacity .3s; -webkit-tap-highlight-color:transparent; }
+#minimal-toggle:hover{ opacity:.9 }
+</style>
+<button id="minimal-toggle" title="显示/隐藏控制面板">&#9881;</button>
+<script>
+(function(){
+  var b = document.getElementById('minimal-toggle');
+  if (b) b.addEventListener('click', function(e){ e.stopPropagation(); document.body.classList.toggle('minimal'); });
+  setTimeout(function(){
+    document.body.classList.add('minimal');
+    document.querySelectorAll('div').forEach(function(el){
+      if (!el.children.length && /^状态[:：]/.test(el.textContent.trim())) el.classList.add('hide-me');
+    });
+  }, 900);
+})();
+</script>
+</body></html>
